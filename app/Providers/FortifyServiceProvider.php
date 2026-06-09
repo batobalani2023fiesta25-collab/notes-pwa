@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Laravel\Fortify\Contracts\LoginResponse;
+use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 
@@ -20,7 +22,23 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(LoginResponse::class, function () {
+            return new class implements LoginResponse {
+                public function toResponse($_request)
+                {
+                    return Inertia::location(route('notes.index'));
+                }
+            };
+        });
+
+        $this->app->singleton(RegisterResponse::class, function () {
+            return new class implements RegisterResponse {
+                public function toResponse($_request)
+                {
+                    return Inertia::location(route('notes.index'));
+                }
+            };
+        });
     }
 
     /**
