@@ -22,34 +22,33 @@
     <!-- Navigation Bar -->
     <nav class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex items-center justify-between h-16">
+
                 <!-- Logo/Title -->
-                <div class="flex items-center gap-3">
-                    <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-linear-to-br from-blue-500 to-blue-600">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="flex items-center justify-center h-10 w-10 shrink-0 rounded-lg bg-linear-to-br from-blue-500 to-blue-600">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
                     </div>
-                    <a href="{{ auth()->check() ? route('notes.index') : route('home') }}" class="text-2xl font-bold text-gray-900 hover:text-gray-700 transition">
+                    <a href="{{ auth()->check() ? route('notes.index') : route('home') }}" class="text-xl font-bold text-gray-900 hover:text-gray-700 transition truncate">
                         Notes App
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="flex items-center gap-4 md:gap-8">
+                <!-- Desktop Auth Links (hidden on mobile) -->
+                <div class="hidden md:flex items-center gap-4">
                     @if (Route::has('login'))
                     @auth
-                    <div class="flex items-center gap-4">
-                        <span class="text-sm text-gray-600">{{ Auth::user()->name ?? 'User' }}</span>
-                        <form method="POST" action="{{ route('logout') }}" class="inline">
-                            @csrf
-                            <button type="submit" class="text-gray-600 hover:text-red-600 font-medium transition text-sm">
-                                Logout
-                            </button>
-                        </form>
-                    </div>
+                    <span class="text-sm text-gray-600 max-w-35 truncate">{{ Auth::user()->name ?? 'User' }}</span>
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="text-gray-600 hover:text-red-600 font-medium transition text-sm">
+                            Logout
+                        </button>
+                    </form>
                     @else
-                    <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900 font-medium transition">
+                    <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900 font-medium transition text-sm">
                         Login
                     </a>
                     @if (Route::has('register'))
@@ -59,27 +58,31 @@
                     @endif
                     @endauth
                     @endif
+                </div>
 
-                    <!-- Install App Button -->
+                <!-- Right side: Install button + mobile hamburger -->
+                <div class="flex items-center gap-2">
+                    <!-- Install App Button: icon-only on mobile, full label on sm+ -->
                     <button
                         id="installBtn"
-                        class="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition"
+                        class="flex items-center gap-2 px-3 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition"
                         title="Install Notes App"
                     >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                         </svg>
-                        Install App
+                        <span class="hidden sm:inline">Install App</span>
+                    </button>
+
+                    <!-- Hamburger (mobile only) -->
+                    <button class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none" onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
                     </button>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none" onclick="toggleMobileMenu()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
             </div>
         </div>
     </nav>
