@@ -65,7 +65,7 @@
                         name="title"
                         value="{{ old('title', $note->title) }}"
                         placeholder="Enter note title..."
-                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm
+                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-gray-900
                                {{ $errors->has('title') ? 'border-red-400 bg-red-50' : 'border-gray-300' }}"
                     >
                     @error('title')
@@ -87,7 +87,7 @@
                         name="category"
                         value="{{ old('category', $note->category) }}"
                         placeholder="e.g. Work, Personal, Ideas..."
-                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm
+                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-gray-900
                                {{ $errors->has('category') ? 'border-red-400 bg-red-50' : 'border-gray-300' }}"
                     >
                     @error('category')
@@ -110,7 +110,7 @@
                         name="content"
                         rows="8"
                         placeholder="Write your note here..."
-                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-y
+                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-gray-900 resize-y
                                {{ $errors->has('content') ? 'border-red-400 bg-red-50' : 'border-gray-300' }}"
                     >{{ old('content', $note->content) }}</textarea>
                     @error('content')

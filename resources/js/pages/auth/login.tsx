@@ -11,7 +11,7 @@ type Props = {
 };
 
 const inputBase =
-    'w-full px-4 py-3 border rounded-lg text-sm outline-none transition';
+    'w-full px-4 py-3 border rounded-lg text-sm text-gray-900 outline-none transition';
 const inputNormal = `${inputBase} border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent`;
 const inputError  = `${inputBase} border-red-400 bg-red-50 focus:ring-2 focus:ring-red-400 focus:border-transparent`;
 
