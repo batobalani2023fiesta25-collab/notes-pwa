@@ -30,7 +30,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
                     </div>
-                    <a href="{{ route('notes.index') }}" class="text-2xl font-bold text-gray-900 hover:text-gray-700 transition">
+                    <a href="{{ auth()->check() ? route('notes.index') : route('home') }}" class="text-2xl font-bold text-gray-900 hover:text-gray-700 transition">
                         Notes App
                     </a>
                 </div>
@@ -141,8 +141,16 @@
     <!-- Mobile Navigation (hidden on larger screens) -->
     <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-200 shadow-sm">
         <div class="px-4 py-3 space-y-2">
-            @if (Route::has('login'))
             @auth
+            <a href="{{ route('notes.index') }}" class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
+                My Notes
+            </a>
+            <a href="{{ route('notes.create') }}" class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
+                New Note
+            </a>
+            <a href="{{ route('profile.edit') }}" class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
+                Profile
+            </a>
             <form method="POST" action="{{ route('logout') }}" class="block">
                 @csrf
                 <button type="submit" class="w-full text-left px-3 py-2 text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-lg transition">
@@ -150,11 +158,17 @@
                 </button>
             </form>
             @else
+            @if (Route::has('login'))
             <a href="{{ route('login') }}" class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
-                Login
+                Sign In
             </a>
-            @endauth
             @endif
+            @if (Route::has('register'))
+            <a href="{{ route('register') }}" class="block px-3 py-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition font-medium">
+                Sign Up
+            </a>
+            @endif
+            @endauth
         </div>
     </div>
 
@@ -176,17 +190,17 @@
                 <div>
                     <h4 class="text-sm font-semibold text-gray-900 mb-4">Quick Links</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="{{ route('notes.index') }}" class="text-gray-600 hover:text-gray-900 transition">Dashboard</a></li>
                         @auth
+                        <li><a href="{{ route('notes.index') }}" class="text-gray-600 hover:text-gray-900 transition">My Notes</a></li>
+                        <li><a href="{{ route('notes.create') }}" class="text-gray-600 hover:text-gray-900 transition">New Note</a></li>
                         <li><a href="{{ route('profile.edit') }}" class="text-gray-600 hover:text-gray-900 transition">Profile</a></li>
+                        @else
+                        <li><a href="{{ route('home') }}" class="text-gray-600 hover:text-gray-900 transition">Home</a></li>
+                        <li><a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900 transition">Sign In</a></li>
+                        @if (Route::has('register'))
+                        <li><a href="{{ route('register') }}" class="text-gray-600 hover:text-gray-900 transition">Sign Up</a></li>
+                        @endif
                         @endauth
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-sm font-semibold text-gray-900 mb-4">Information</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition">About</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition">Contact</a></li>
                     </ul>
                 </div>
             </div>
