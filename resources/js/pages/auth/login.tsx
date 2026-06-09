@@ -84,7 +84,7 @@ export default function Login({ status, canResetPassword, canRegister }: Props) 
                                 </label>
                                 {canResetPassword && (
                                     <a
-                                        href={request()}
+                                        href={request.definition.url}
                                         style={{ fontSize: '0.75rem', color: '#2563eb', textDecoration: 'none', fontWeight: 500 }}
                                         onMouseOver={e => (e.currentTarget.style.color = '#1d4ed8')}
                                         onMouseOut={e => (e.currentTarget.style.color = '#2563eb')}
@@ -152,7 +152,7 @@ export default function Login({ status, canResetPassword, canRegister }: Props) 
                             <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#6b7280', margin: 0 }}>
                                 Don't have an account?{' '}
                                 <a
-                                    href={register()}
+                                    href={register.definition.url}
                                     style={{ color: '#2563eb', fontWeight: 500, textDecoration: 'none' }}
                                     onMouseOver={e => (e.currentTarget.style.color = '#1d4ed8')}
                                     onMouseOut={e => (e.currentTarget.style.color = '#2563eb')}

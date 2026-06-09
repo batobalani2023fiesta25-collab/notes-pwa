@@ -140,7 +140,7 @@ export default function Register() {
                         <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#6b7280', margin: 0 }}>
                             Already have an account?{' '}
                             <a
-                                href={login()}
+                                href={login.definition.url}
                                 style={{ color: '#2563eb', fontWeight: 500, textDecoration: 'none' }}
                                 onMouseOver={e => (e.currentTarget.style.color = '#1d4ed8')}
                                 onMouseOut={e => (e.currentTarget.style.color = '#2563eb')}
